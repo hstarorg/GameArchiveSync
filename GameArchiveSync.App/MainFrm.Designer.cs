@@ -38,9 +38,9 @@
             this.AppNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.AppNotifyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.退出EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于AToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.SendFeedbackMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CheckUpdateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AppMenuStrip.SuspendLayout();
             this.AppStatusStrip.SuspendLayout();
             this.AppNotifyContextMenuStrip.SuspendLayout();
@@ -81,9 +81,9 @@
             // 帮助HToolStripMenuItem
             // 
             this.帮助HToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.关于AToolStripMenuItem,
-            this.fankToolStripMenuItem,
-            this.关于AToolStripMenuItem1});
+            this.SendFeedbackMenuItem,
+            this.CheckUpdateMenuItem,
+            this.AboutMenuItem});
             this.帮助HToolStripMenuItem.Name = "帮助HToolStripMenuItem";
             this.帮助HToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
             this.帮助HToolStripMenuItem.Text = "帮助(&H)";
@@ -109,23 +109,24 @@
             this.退出EToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.退出EToolStripMenuItem.Text = "退出(&E)";
             // 
-            // 关于AToolStripMenuItem
+            // SendFeedbackMenuItem
             // 
-            this.关于AToolStripMenuItem.Name = "关于AToolStripMenuItem";
-            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.关于AToolStripMenuItem.Text = "发送反馈(&F)";
+            this.SendFeedbackMenuItem.Name = "SendFeedbackMenuItem";
+            this.SendFeedbackMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SendFeedbackMenuItem.Text = "发送反馈(&F)";
+            this.SendFeedbackMenuItem.Click += new System.EventHandler(this.SendFeedbackMenuItem_Click);
             // 
-            // fankToolStripMenuItem
+            // CheckUpdateMenuItem
             // 
-            this.fankToolStripMenuItem.Name = "fankToolStripMenuItem";
-            this.fankToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.fankToolStripMenuItem.Text = "检查更新";
+            this.CheckUpdateMenuItem.Name = "CheckUpdateMenuItem";
+            this.CheckUpdateMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CheckUpdateMenuItem.Text = "检查更新";
             // 
-            // 关于AToolStripMenuItem1
+            // AboutMenuItem
             // 
-            this.关于AToolStripMenuItem1.Name = "关于AToolStripMenuItem1";
-            this.关于AToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.关于AToolStripMenuItem1.Text = "关于(&A)...";
+            this.AboutMenuItem.Name = "AboutMenuItem";
+            this.AboutMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AboutMenuItem.Text = "关于(&A)...";
             // 
             // MainFrm
             // 
@@ -162,9 +163,9 @@
         private System.Windows.Forms.NotifyIcon AppNotifyIcon;
         private System.Windows.Forms.ContextMenuStrip AppNotifyContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 退出EToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fankToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem SendFeedbackMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CheckUpdateMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AboutMenuItem;
     }
 }
 

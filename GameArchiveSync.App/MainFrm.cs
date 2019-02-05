@@ -26,5 +26,10 @@ namespace GameArchiveSync.App
         {
             this.WindowState = FormWindowState.Normal;
         }
+
+        private void SendFeedbackMenuItem_Click(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/hstarorg/GameArchiveSync/issues/new");
+        }
     }
 }
