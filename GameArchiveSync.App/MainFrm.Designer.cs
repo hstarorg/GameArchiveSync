@@ -32,15 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrm));
             this.AppMenuStrip = new System.Windows.Forms.MenuStrip();
             this.功能FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AppStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.帮助HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AppNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.AppNotifyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.退出EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SendFeedbackMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CheckUpdateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AppStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.AppNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.AppNotifyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AppMenuStrip.SuspendLayout();
             this.AppStatusStrip.SuspendLayout();
             this.AppNotifyContextMenuStrip.SuspendLayout();
@@ -62,6 +62,35 @@
             this.功能FToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
             this.功能FToolStripMenuItem.Text = "设置(&S)";
             // 
+            // 帮助HToolStripMenuItem
+            // 
+            this.帮助HToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SendFeedbackMenuItem,
+            this.CheckUpdateMenuItem,
+            this.AboutMenuItem});
+            this.帮助HToolStripMenuItem.Name = "帮助HToolStripMenuItem";
+            this.帮助HToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
+            this.帮助HToolStripMenuItem.Text = "帮助(&H)";
+            // 
+            // SendFeedbackMenuItem
+            // 
+            this.SendFeedbackMenuItem.Name = "SendFeedbackMenuItem";
+            this.SendFeedbackMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.SendFeedbackMenuItem.Text = "发送反馈(&F)";
+            this.SendFeedbackMenuItem.Click += new System.EventHandler(this.SendFeedbackMenuItem_Click);
+            // 
+            // CheckUpdateMenuItem
+            // 
+            this.CheckUpdateMenuItem.Name = "CheckUpdateMenuItem";
+            this.CheckUpdateMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.CheckUpdateMenuItem.Text = "检查更新";
+            // 
+            // AboutMenuItem
+            // 
+            this.AboutMenuItem.Name = "AboutMenuItem";
+            this.AboutMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.AboutMenuItem.Text = "关于(&A)...";
+            // 
             // AppStatusStrip
             // 
             this.AppStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -78,16 +107,6 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(68, 17);
             this.toolStripStatusLabel1.Text = "系统时间：";
             // 
-            // 帮助HToolStripMenuItem
-            // 
-            this.帮助HToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SendFeedbackMenuItem,
-            this.CheckUpdateMenuItem,
-            this.AboutMenuItem});
-            this.帮助HToolStripMenuItem.Name = "帮助HToolStripMenuItem";
-            this.帮助HToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
-            this.帮助HToolStripMenuItem.Text = "帮助(&H)";
-            // 
             // AppNotifyIcon
             // 
             this.AppNotifyIcon.ContextMenuStrip = this.AppNotifyContextMenuStrip;
@@ -99,34 +118,16 @@
             // AppNotifyContextMenuStrip
             // 
             this.AppNotifyContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.退出EToolStripMenuItem});
+            this.ExitMenuItem});
             this.AppNotifyContextMenuStrip.Name = "AppNotifyContextMenuStrip";
-            this.AppNotifyContextMenuStrip.Size = new System.Drawing.Size(116, 26);
+            this.AppNotifyContextMenuStrip.Size = new System.Drawing.Size(181, 48);
             // 
-            // 退出EToolStripMenuItem
+            // ExitMenuItem
             // 
-            this.退出EToolStripMenuItem.Name = "退出EToolStripMenuItem";
-            this.退出EToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-            this.退出EToolStripMenuItem.Text = "退出(&E)";
-            // 
-            // SendFeedbackMenuItem
-            // 
-            this.SendFeedbackMenuItem.Name = "SendFeedbackMenuItem";
-            this.SendFeedbackMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.SendFeedbackMenuItem.Text = "发送反馈(&F)";
-            this.SendFeedbackMenuItem.Click += new System.EventHandler(this.SendFeedbackMenuItem_Click);
-            // 
-            // CheckUpdateMenuItem
-            // 
-            this.CheckUpdateMenuItem.Name = "CheckUpdateMenuItem";
-            this.CheckUpdateMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.CheckUpdateMenuItem.Text = "检查更新";
-            // 
-            // AboutMenuItem
-            // 
-            this.AboutMenuItem.Name = "AboutMenuItem";
-            this.AboutMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.AboutMenuItem.Text = "关于(&A)...";
+            this.ExitMenuItem.Name = "ExitMenuItem";
+            this.ExitMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitMenuItem.Text = "退出(&E)";
+            this.ExitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
             // MainFrm
             // 
@@ -142,6 +143,7 @@
             this.Name = "MainFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "幻星游戏存储同步 - by hstarorg";
+            this.Load += new System.EventHandler(this.MainFrm_Load);
             this.SizeChanged += new System.EventHandler(this.MainFrm_SizeChanged);
             this.AppMenuStrip.ResumeLayout(false);
             this.AppMenuStrip.PerformLayout();
@@ -162,7 +164,7 @@
         private System.Windows.Forms.ToolStripMenuItem 帮助HToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon AppNotifyIcon;
         private System.Windows.Forms.ContextMenuStrip AppNotifyContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem 退出EToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExitMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SendFeedbackMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CheckUpdateMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AboutMenuItem;
