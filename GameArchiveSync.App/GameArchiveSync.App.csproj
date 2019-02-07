@@ -8,7 +8,7 @@
     <ProjectGuid>{6366A03D-508C-4A19-B562-055A13844572}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>GameArchiveSync.App</RootNamespace>
-    <AssemblyName>GameArchiveSync.App</AssemblyName>
+    <AssemblyName>GameArchiveSyncApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,6 +34,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>gamepad_72px.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LibGit2Sharp, Version=0.26.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
@@ -120,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\gamepad_72px.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gamepad_72px.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
