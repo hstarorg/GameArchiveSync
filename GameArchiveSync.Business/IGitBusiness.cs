@@ -9,5 +9,7 @@ namespace GameArchiveSync.Business
         bool IsGitRepository(string workdirPath);
 
         string CloneRepo(string workdirPath, GameArchiveStorageRepo repoInfo);
+
+        bool CommitAndPush(string workdir, string message, GitCredential gitCredential);
     }
 }

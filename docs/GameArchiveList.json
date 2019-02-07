@@ -28,7 +28,7 @@
     "storageLocation": "NFS SHIFT"
   },
   {
-    "gameId": "Rise-of-the-Tomb-Raider",
+    "gameId": "rise-of-the-tomb-raider",
     "gameName": "古墓丽影：崛起(10)",
     "platform": "Windows10",
     "rootDir": "C:\\Users\\{UserName}\\Documents",

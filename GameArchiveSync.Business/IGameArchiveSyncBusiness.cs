@@ -16,5 +16,7 @@ namespace GameArchiveSync.Business
         IList<GameArchive> GetAllGameArchiveList();
 
         IList<GameArchive> GetLocalGameArchiveList(string userName);
+
+        bool SyncGameArchiveToRemote(IList<GameArchive> gameArchives, string gitWorkdir, string userName);
     }
 }

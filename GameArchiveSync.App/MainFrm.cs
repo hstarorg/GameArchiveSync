@@ -1,9 +1,12 @@
 ﻿using GameArchiveSync.App.Forms;
 using GameArchiveSync.App.Helpers;
 using GameArchiveSync.Business;
+using GameArchiveSync.Business.Helpers;
 using GameArchiveSync.Business.Implements;
 using GameArchiveSync.Business.Models;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,12 +22,14 @@ namespace GameArchiveSync.App
         /// 仓库是否已初始化
         /// </summary>
         private bool isRepoInitialized = false;
+        private IList<GameArchive> localGameArchiveList = new List<GameArchive>();
 
         private delegate void DelegateVoid();
 
         public MainFrm()
         {
             InitializeComponent();
+            ClbGameArchive.DisplayMember = "GameName";
             this.gasBiz = new DefaultGameArchiveSyncBusiness(GlobalConfig.DbPath);
             this.gitBiz = new DefaultGitBusiness();
             this.LoadData();
@@ -115,7 +120,20 @@ namespace GameArchiveSync.App
 
         private void BtnBackup_Click(object sender, EventArgs e)
         {
-            WinFormsUtil.Alert(WinFormsUtil.GetCurrentUser());
+            var gameArchiveList = new List<GameArchive>();
+            foreach (var item in this.ClbGameArchive.CheckedItems)
+            {
+                gameArchiveList.Add(item as GameArchive);
+            }
+            var syncOk = this.gasBiz.SyncGameArchiveToRemote(gameArchiveList, GlobalConfig.TempRepoPath, WinFormsUtil.GetCurrentUser());
+            if (syncOk)
+            {
+                WinFormsUtil.Alert("同步成功！");
+            }
+            else
+            {
+                WinFormsUtil.Alert("同步失败");
+            }
         }
 
 
@@ -162,11 +180,14 @@ namespace GameArchiveSync.App
 
         private void RefreshGameList()
         {
-            var localList = this.gasBiz.GetLocalGameArchiveList(WinFormsUtil.GetCurrentUser());
+            this.localGameArchiveList = this.gasBiz.GetLocalGameArchiveList(WinFormsUtil.GetCurrentUser());
             this.DelayDo(() =>
             {
                 ClbGameArchive.Items.Clear();
-                ClbGameArchive.Items.AddRange(localList.Select(x => x.GameName).ToArray());
+                this.localGameArchiveList.ToList().ForEach(x =>
+                {
+                    ClbGameArchive.Items.Add(x, CheckState.Checked);
+                });
             }, 300);
         }
 

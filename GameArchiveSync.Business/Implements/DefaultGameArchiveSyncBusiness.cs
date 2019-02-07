@@ -1,6 +1,7 @@
 ﻿using GameArchiveSync.Business.Helpers;
 using GameArchiveSync.Business.Models;
 using LiteDB;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,9 +20,12 @@ namespace GameArchiveSync.Business.Implements
         private const string GAME_ARCHIVE_STORAGE_SETTINGS_COLLECTION = "game_archive_storage_repo";
         private const string GAME_ARCHIVE_COLLECTION = "game_archive";
 
+        private readonly IGitBusiness gitBiz;
+
         public DefaultGameArchiveSyncBusiness(string dbPath)
         {
             this.DbPath = dbPath;
+            this.gitBiz = new DefaultGitBusiness();
         }
 
         private LiteCollection<T> GetCollection<T>(LiteDatabase db, string collectionName) where T : class
@@ -95,6 +99,19 @@ namespace GameArchiveSync.Business.Implements
                     col.Upsert(gameArchive.GameId, gameArchive);
                 }
             }
+            return true;
+        }
+
+        public bool SyncGameArchiveToRemote(IList<GameArchive> gameArchives, string gitWorkdir, string userName)
+        {
+            var storageRepoInfo = this.GetGameArchiveStorageRepoInfo();
+            gameArchives.ToList().ForEach(x =>
+            {
+                var gameArchivePath = Path.Combine(x.RootDir.Replace("{UserName}", userName), x.StorageLocation);
+                DirectoryHelper.CopyDirectory(gameArchivePath, Path.Combine(gitWorkdir, x.GameId));
+            });
+            var commitMessage = $"{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")} saved the game archives.(by game archive sync)";
+            this.gitBiz.CommitAndPush(gitWorkdir, commitMessage, storageRepoInfo.GitCredential);
             return true;
         }
     }
