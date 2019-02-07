@@ -5,6 +5,8 @@ namespace GameArchiveSync.Business
 {
     public interface IGameArchiveSyncBusiness
     {
-        Task<GameArchiveStorageRepo> GetGameArchiveStorageRepoInfo();
+        GameArchiveStorageRepo GetGameArchiveStorageRepoInfo();
+
+        bool HasGameArchiveStorageRepo();
     }
 }

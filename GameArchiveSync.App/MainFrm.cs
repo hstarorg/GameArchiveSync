@@ -14,8 +14,7 @@ namespace GameArchiveSync.App
         public MainFrm()
         {
             InitializeComponent();
-            var dbPath = $"{AppDomain.CurrentDomain.BaseDirectory}/GameArchiveSync.db";
-            this.gasBiz = new DefaultGameArchiveSyncBusiness(dbPath);
+            this.gasBiz = new DefaultGameArchiveSyncBusiness(GlobalConfig.DbPath);
             this.LoadAppData();
         }
 
@@ -46,11 +45,14 @@ namespace GameArchiveSync.App
         private void MainFrm_Load(object sender, EventArgs e)
         {
             var mainFrm = this;
-            this.DelayDo(() =>
+            if (!this.gasBiz.HasGameArchiveStorageRepo())
             {
-                var settingsFrm = new SettingsFrm();
-                settingsFrm.ShowDialog(mainFrm);
-            });
+                this.DelayDo(() =>
+                {
+                    var settingsFrm = new SettingsFrm();
+                    settingsFrm.ShowDialog(mainFrm);
+                });
+            }
         }
 
         private void ExitMenuItem_Click(object sender, EventArgs e)

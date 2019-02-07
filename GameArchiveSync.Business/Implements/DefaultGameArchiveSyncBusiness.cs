@@ -1,30 +1,30 @@
-﻿using System.Data;
-using System.Data.SQLite;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GameArchiveSync.Business.Models;
+using LiteDB;
 
 namespace GameArchiveSync.Business.Implements
 {
     public class DefaultGameArchiveSyncBusiness : IGameArchiveSyncBusiness
     {
-        private readonly IDbConnection DbConn;
-        public DefaultGameArchiveSyncBusiness(string sqlitePath)
+        private readonly string DbPath;
+        public DefaultGameArchiveSyncBusiness(string dbPath)
         {
-            DbConn = new SQLiteConnection(this.BuildSqliteConnectionString(sqlitePath));
+            this.DbPath = dbPath;
         }
 
-        private string BuildSqliteConnectionString(string dataSource)
+        public GameArchiveStorageRepo GetGameArchiveStorageRepoInfo()
         {
-            var builder = new SQLiteConnectionStringBuilder
+            using (var db = new LiteDatabase(this.DbPath))
             {
-                DataSource = dataSource
-            };
-            return builder.ConnectionString;
+                var col = db.GetCollection<GameArchiveStorageRepo>("game_archive_storage_repo");
+                return col.FindOne(x => true);
+            }
         }
 
-        public async Task<GameArchiveStorageRepo> GetGameArchiveStorageRepoInfo()
+        public bool HasGameArchiveStorageRepo()
         {
-            return null;
+            var repoInfo = this.GetGameArchiveStorageRepoInfo();
+            return repoInfo != null;
         }
     }
 }

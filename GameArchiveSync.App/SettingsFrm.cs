@@ -17,17 +17,23 @@ namespace GameArchiveSync.App
     public partial class SettingsFrm : Form
     {
         private readonly IGitBusiness gitBiz;
+        private readonly IGameArchiveSyncBusiness gasBiz;
+
         public SettingsFrm()
         {
             InitializeComponent();
-            gitBiz = new DefaultGitBusiness();
+            this.gitBiz = new DefaultGitBusiness();
+            this.gasBiz = new DefaultGameArchiveSyncBusiness(GlobalConfig.DbPath);
         }
 
         #region UI Events
 
         private void SettingsFrm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (!this.gasBiz.HasGameArchiveStorageRepo())
+            {
                 Application.Exit();
+            }
         }
 
         private void BtnCheckConnection_Click(object sender, EventArgs e)
