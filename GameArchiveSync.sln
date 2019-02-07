@@ -9,9 +9,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameArchiveSync.Business", "GameArchiveSync.Business\GameArchiveSync.Business.csproj", "{44B4368E-E13D-4508-ABCD-253EAC8BD6A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameArchiveSync.Business", "GameArchiveSync.Business\GameArchiveSync.Business.csproj", "{44B4368E-E13D-4508-ABCD-253EAC8BD6A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameArchiveSync.App", "GameArchiveSync.App\GameArchiveSync.App.csproj", "{6366A03D-508C-4A19-B562-055A13844572}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{42402316-97A8-4702-8C86-3466A805AD19}"
+	ProjectSection(SolutionItems) = preProject
+		docs\DB_Degisn.md = docs\DB_Degisn.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

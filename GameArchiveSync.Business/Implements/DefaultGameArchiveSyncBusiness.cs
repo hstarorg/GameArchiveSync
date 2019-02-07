@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using GameArchiveSync.Business.Models;
+﻿using GameArchiveSync.Business.Models;
 using LiteDB;
 
 namespace GameArchiveSync.Business.Implements
@@ -7,6 +6,7 @@ namespace GameArchiveSync.Business.Implements
     public class DefaultGameArchiveSyncBusiness : IGameArchiveSyncBusiness
     {
         private readonly string DbPath;
+
         public DefaultGameArchiveSyncBusiness(string dbPath)
         {
             this.DbPath = dbPath;

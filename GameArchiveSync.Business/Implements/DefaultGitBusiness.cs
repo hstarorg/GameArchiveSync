@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GameArchiveSync.Business.Models;
+﻿using GameArchiveSync.Business.Models;
 using LibGit2Sharp;
 using LibGit2Sharp.Handlers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameArchiveSync.Business.Implements
 {
@@ -59,6 +58,7 @@ namespace GameArchiveSync.Business.Implements
                             Username = gitCredential.UserName,
                             Password = gitCredential.Password
                         };
+
                     default:
                         throw new ArgumentException("Invalid AuthorizationMode");
                 }

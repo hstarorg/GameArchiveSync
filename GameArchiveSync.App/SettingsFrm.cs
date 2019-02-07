@@ -2,14 +2,7 @@
 using GameArchiveSync.Business.Implements;
 using GameArchiveSync.Business.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GameArchiveSync.App
@@ -53,7 +46,6 @@ namespace GameArchiveSync.App
             {
                 if (isGitRepo)
                 {
-
                 }
                 else
                 {
@@ -67,6 +59,6 @@ namespace GameArchiveSync.App
             }
         }
 
-        #endregion
+        #endregion UI Events
     }
 }

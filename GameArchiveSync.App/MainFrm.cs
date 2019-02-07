@@ -10,7 +10,9 @@ namespace GameArchiveSync.App
     public partial class MainFrm : Form
     {
         private readonly IGameArchiveSyncBusiness gasBiz;
+
         private delegate void DelegateVoid();
+
         public MainFrm()
         {
             InitializeComponent();
@@ -19,6 +21,7 @@ namespace GameArchiveSync.App
         }
 
         #region UI Events
+
         private void MainFrm_SizeChanged(object sender, System.EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -60,12 +63,12 @@ namespace GameArchiveSync.App
             Application.Exit();
         }
 
-        #endregion
+        #endregion UI Events
 
         #region Util Functions
+
         private void LoadAppData()
         {
-
         }
 
         private void DelayDo(Action action, int delayMs = 0)
@@ -77,6 +80,6 @@ namespace GameArchiveSync.App
             });
         }
 
-        #endregion
+        #endregion Util Functions
     }
 }
