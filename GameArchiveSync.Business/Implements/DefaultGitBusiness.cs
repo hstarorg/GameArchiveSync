@@ -9,35 +9,12 @@ namespace GameArchiveSync.Business.Implements
 {
     public class DefaultGitBusiness : IGitBusiness
     {
-        public bool Fetch(string gitPath)
+        public string CloneRepo(string workdirPath, GameArchiveStorageRepo repoInfo)
         {
-            using (var repo = new Repository(gitPath))
+            return Repository.Clone(repoInfo.RepoAddress, workdirPath, new CloneOptions
             {
-                var fetchOpt = new FetchOptions
-                {
-                    CredentialsProvider = (url, user, cred) => new DefaultCredentials()
-                    {
-                    }
-                };
-                string logMessage = "";
-                var remote = repo.Network.Remotes["origin"];
-                IEnumerable<string> refSpecs = remote.FetchRefSpecs.Select(x => x.Specification);
-                Commands.Fetch(repo, remote.Name, refSpecs, fetchOpt, logMessage);
-            }
-            return true;
-        }
-
-        public string CloneRepo(string gitAddress, string workdirPath)
-        {
-            return Repository.Clone(gitAddress, workdirPath, new CloneOptions
-            {
-                BranchName = "master",
-
-                CredentialsProvider = (url, usernameFromUrl, type) => new UsernamePasswordCredentials
-                {
-                    Username = "",
-                    Password = ""
-                }
+                BranchName = repoInfo.Branch,
+                CredentialsProvider = this.GetCredentialsHandler(repoInfo.GitCredential)
             });
         }
 

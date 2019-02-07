@@ -7,5 +7,7 @@ namespace GameArchiveSync.Business
         GameArchiveStorageRepo GetGameArchiveStorageRepoInfo();
 
         bool HasGameArchiveStorageRepo();
+
+        bool SaveGameArchiveStorageRepoInfo(GameArchiveStorageRepo repoSettingInfo);
     }
 }

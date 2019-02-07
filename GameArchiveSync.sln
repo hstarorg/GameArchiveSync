@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{42402316-97A8-4702-8C86-3466A805AD19}"
 	ProjectSection(SolutionItems) = preProject
 		docs\DB_Degisn.md = docs\DB_Degisn.md
+		docs\GameArchiveList.json = docs\GameArchiveList.json
 	EndProjectSection
 EndProject
 Global

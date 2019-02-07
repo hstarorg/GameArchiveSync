@@ -17,7 +17,7 @@ namespace GameArchiveSync.Business.Implements
             using (var db = new LiteDatabase(this.DbPath))
             {
                 var col = db.GetCollection<GameArchiveStorageRepo>("game_archive_storage_repo");
-                return col.FindOne(x => true);
+                return col.FindById("repoSettings");
             }
         }
 
@@ -25,6 +25,15 @@ namespace GameArchiveSync.Business.Implements
         {
             var repoInfo = this.GetGameArchiveStorageRepoInfo();
             return repoInfo != null;
+        }
+
+        public bool SaveGameArchiveStorageRepoInfo(GameArchiveStorageRepo repoSettingInfo)
+        {
+            using (var db = new LiteDatabase(this.DbPath))
+            {
+                var col = db.GetCollection<GameArchiveStorageRepo>("game_archive_storage_repo");
+                return col.Upsert("repoSettings", repoSettingInfo);
+            }
         }
     }
 }

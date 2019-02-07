@@ -8,8 +8,6 @@ namespace GameArchiveSync.Business
 
         bool IsGitRepository(string workdirPath);
 
-        bool Fetch(string gitPath);
-
-        string CloneRepo(string gitAddress, string workdirPath);
+        string CloneRepo(string workdirPath, GameArchiveStorageRepo repoInfo);
     }
 }

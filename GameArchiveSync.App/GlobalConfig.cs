@@ -9,9 +9,16 @@ namespace GameArchiveSync.App
         /// </summary>
         public readonly static string DbPath;
 
+        public readonly static string TempRepoPath;
+
+        public const string CurrentVersion = "0.0.1";
+
         static GlobalConfig()
         {
-            DbPath = $"{AppDomain.CurrentDomain.BaseDirectory}/GameArchiveSync.db";
+            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+
+            DbPath = $"{baseDir}/GameArchiveSync.db";
+            TempRepoPath = $"{baseDir}/repo";
         }
     }
 }
