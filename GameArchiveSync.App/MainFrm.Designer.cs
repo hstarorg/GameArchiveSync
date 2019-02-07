@@ -33,12 +33,13 @@
             this.AppMenuStrip = new System.Windows.Forms.MenuStrip();
             this.功能FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RepoSettingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SyncGameArchiveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SendFeedbackMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CheckUpdateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AppStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SysTimeStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.AppNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.AppNotifyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,11 +47,15 @@
             this.BtnBackup = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.BtnSyncGameList = new System.Windows.Forms.Button();
+            this.BtnRefreshArchive = new System.Windows.Forms.Button();
+            this.SystemTimeTimer = new System.Windows.Forms.Timer(this.components);
+            this.ArchiveRepoStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ClbGameArchive = new System.Windows.Forms.CheckedListBox();
             this.AppMenuStrip.SuspendLayout();
             this.AppStatusStrip.SuspendLayout();
             this.AppNotifyContextMenuStrip.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // AppMenuStrip
@@ -66,7 +71,8 @@
             // 功能FToolStripMenuItem
             // 
             this.功能FToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RepoSettingsMenuItem});
+            this.RepoSettingsMenuItem,
+            this.SyncGameArchiveMenuItem});
             this.功能FToolStripMenuItem.Name = "功能FToolStripMenuItem";
             this.功能FToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
             this.功能FToolStripMenuItem.Text = "设置(&S)";
@@ -74,9 +80,16 @@
             // RepoSettingsMenuItem
             // 
             this.RepoSettingsMenuItem.Name = "RepoSettingsMenuItem";
-            this.RepoSettingsMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RepoSettingsMenuItem.Size = new System.Drawing.Size(148, 22);
             this.RepoSettingsMenuItem.Text = "存储仓库设置";
             this.RepoSettingsMenuItem.Click += new System.EventHandler(this.RepoSettingsMenuItem_Click);
+            // 
+            // SyncGameArchiveMenuItem
+            // 
+            this.SyncGameArchiveMenuItem.Name = "SyncGameArchiveMenuItem";
+            this.SyncGameArchiveMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.SyncGameArchiveMenuItem.Text = "同步游戏列表";
+            this.SyncGameArchiveMenuItem.Click += new System.EventHandler(this.SyncGameArchiveMenuItem_Click);
             // 
             // 帮助HToolStripMenuItem
             // 
@@ -112,18 +125,19 @@
             // AppStatusStrip
             // 
             this.AppStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.SysTimeStatusLabel,
+            this.ArchiveRepoStatusLabel});
             this.AppStatusStrip.Location = new System.Drawing.Point(0, 439);
             this.AppStatusStrip.Name = "AppStatusStrip";
             this.AppStatusStrip.Size = new System.Drawing.Size(784, 22);
             this.AppStatusStrip.SizingGrip = false;
             this.AppStatusStrip.TabIndex = 1;
             // 
-            // toolStripStatusLabel1
+            // SysTimeStatusLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(68, 17);
-            this.toolStripStatusLabel1.Text = "系统时间：";
+            this.SysTimeStatusLabel.Name = "SysTimeStatusLabel";
+            this.SysTimeStatusLabel.Size = new System.Drawing.Size(68, 17);
+            this.SysTimeStatusLabel.Text = "系统时间：";
             // 
             // AppNotifyIcon
             // 
@@ -149,20 +163,18 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.BtnSyncGameList);
-            this.groupBox1.Controls.Add(this.BtnBackup);
-            this.groupBox1.Location = new System.Drawing.Point(572, 28);
+            this.groupBox1.Location = new System.Drawing.Point(552, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 408);
+            this.groupBox1.Size = new System.Drawing.Size(220, 408);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "功能区";
+            this.groupBox1.Text = "其他";
             // 
             // BtnBackup
             // 
-            this.BtnBackup.Location = new System.Drawing.Point(62, 37);
+            this.BtnBackup.Location = new System.Drawing.Point(6, 20);
             this.BtnBackup.Name = "BtnBackup";
-            this.BtnBackup.Size = new System.Drawing.Size(75, 23);
+            this.BtnBackup.Size = new System.Drawing.Size(208, 54);
             this.BtnBackup.TabIndex = 0;
             this.BtnBackup.Text = "立即备份";
             this.BtnBackup.UseVisualStyleBackColor = true;
@@ -170,31 +182,56 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Location = new System.Drawing.Point(243, 28);
+            this.groupBox2.Controls.Add(this.BtnBackup);
+            this.groupBox2.Location = new System.Drawing.Point(282, 28);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(323, 408);
+            this.groupBox2.Size = new System.Drawing.Size(220, 408);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox1";
+            this.groupBox2.Text = "备份";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.ClbGameArchive);
+            this.groupBox3.Controls.Add(this.BtnRefreshArchive);
             this.groupBox3.Location = new System.Drawing.Point(12, 28);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(225, 408);
+            this.groupBox3.Size = new System.Drawing.Size(220, 408);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox1";
+            this.groupBox3.Text = "游戏存档列表";
             // 
-            // BtnSyncGameList
+            // BtnRefreshArchive
             // 
-            this.BtnSyncGameList.Location = new System.Drawing.Point(6, 379);
-            this.BtnSyncGameList.Name = "BtnSyncGameList";
-            this.BtnSyncGameList.Size = new System.Drawing.Size(188, 23);
-            this.BtnSyncGameList.TabIndex = 1;
-            this.BtnSyncGameList.Text = "同步游戏列表";
-            this.BtnSyncGameList.UseVisualStyleBackColor = true;
-            this.BtnSyncGameList.Click += new System.EventHandler(this.BtnSyncGameList_Click);
+            this.BtnRefreshArchive.Location = new System.Drawing.Point(6, 379);
+            this.BtnRefreshArchive.Name = "BtnRefreshArchive";
+            this.BtnRefreshArchive.Size = new System.Drawing.Size(208, 23);
+            this.BtnRefreshArchive.TabIndex = 1;
+            this.BtnRefreshArchive.Text = "刷新";
+            this.BtnRefreshArchive.UseVisualStyleBackColor = true;
+            this.BtnRefreshArchive.Click += new System.EventHandler(this.BtnRefreshArchive_Click);
+            // 
+            // SystemTimeTimer
+            // 
+            this.SystemTimeTimer.Enabled = true;
+            this.SystemTimeTimer.Interval = 1000;
+            this.SystemTimeTimer.Tick += new System.EventHandler(this.SystemTimeTimer_Tick);
+            // 
+            // ArchiveRepoStatusLabel
+            // 
+            this.ArchiveRepoStatusLabel.Name = "ArchiveRepoStatusLabel";
+            this.ArchiveRepoStatusLabel.Size = new System.Drawing.Size(68, 17);
+            this.ArchiveRepoStatusLabel.Text = "存档仓库：";
+            // 
+            // ClbGameArchive
+            // 
+            this.ClbGameArchive.CheckOnClick = true;
+            this.ClbGameArchive.FormattingEnabled = true;
+            this.ClbGameArchive.Location = new System.Drawing.Point(6, 20);
+            this.ClbGameArchive.Name = "ClbGameArchive";
+            this.ClbGameArchive.Size = new System.Drawing.Size(208, 356);
+            this.ClbGameArchive.TabIndex = 2;
+            this.ClbGameArchive.ThreeDCheckBoxes = true;
             // 
             // MainFrm
             // 
@@ -220,7 +257,8 @@
             this.AppStatusStrip.ResumeLayout(false);
             this.AppStatusStrip.PerformLayout();
             this.AppNotifyContextMenuStrip.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,7 +269,7 @@
         private System.Windows.Forms.MenuStrip AppMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 功能FToolStripMenuItem;
         private System.Windows.Forms.StatusStrip AppStatusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel SysTimeStatusLabel;
         private System.Windows.Forms.ToolStripMenuItem 帮助HToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon AppNotifyIcon;
         private System.Windows.Forms.ContextMenuStrip AppNotifyContextMenuStrip;
@@ -244,7 +282,11 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button BtnBackup;
-        private System.Windows.Forms.Button BtnSyncGameList;
+        private System.Windows.Forms.Button BtnRefreshArchive;
+        private System.Windows.Forms.ToolStripMenuItem SyncGameArchiveMenuItem;
+        private System.Windows.Forms.Timer SystemTimeTimer;
+        private System.Windows.Forms.ToolStripStatusLabel ArchiveRepoStatusLabel;
+        private System.Windows.Forms.CheckedListBox ClbGameArchive;
     }
 }
 

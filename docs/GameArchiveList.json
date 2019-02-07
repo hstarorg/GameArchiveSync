@@ -5,5 +5,54 @@
     "platform": "Windows10",
     "rootDir": "C:\\Users\\{UserName}\\Documents",
     "storageLocation": "Rockstar Games\\GTA V"
+  },
+  {
+    "gameId": "oppw3",
+    "gameName": "海贼无双3",
+    "platform": "Windows10",
+    "rootDir": "C:\\Users\\{UserName}\\Documents",
+    "storageLocation": "BNE\\One Piece Pirate Warriors 3"
+  },
+  {
+    "gameId": "musouorochi3",
+    "gameName": "无双大蛇3",
+    "platform": "Windows10",
+    "rootDir": "C:\\Users\\{UserName}\\Documents",
+    "storageLocation": "KoeiTecmo\\WARRIORS OROCHI 4"
+  },
+  {
+    "gameId": "nfs13",
+    "gameName": "极品飞车13",
+    "platform": "Windows10",
+    "rootDir": "C:\\Users\\{UserName}\\Documents",
+    "storageLocation": "NFS SHIFT"
+  },
+  {
+    "gameId": "Rise-of-the-Tomb-Raider",
+    "gameName": "古墓丽影：崛起(10)",
+    "platform": "Windows10",
+    "rootDir": "C:\\Users\\{UserName}\\Documents",
+    "storageLocation": "Rise of the Tomb Raider"
+  },
+  {
+    "gameId": "shadow-of-the-tomb-raider",
+    "gameName": "古墓丽影：暗影(11)",
+    "platform": "Windows10",
+    "rootDir": "C:\\Users\\{UserName}\\Documents",
+    "storageLocation": "Shadow of the Tomb Raider"
+  },
+  {
+    "gameId": "tmnt",
+    "gameName": "忍者神龟：曼哈顿突变",
+    "platform": "Windows10",
+    "rootDir": "C:\\Users\\{UserName}\\Documents",
+    "storageLocation": "TMNT_MiM"
+  },
+  {
+    "gameId": "tmnt",
+    "gameName": "忍者神龟：曼哈顿突变",
+    "platform": "Windows10",
+    "rootDir": "C:\\Users\\{UserName}\\Documents",
+    "storageLocation": "TMNT_MiM"
   }
 ]

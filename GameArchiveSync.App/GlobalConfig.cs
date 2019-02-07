@@ -11,6 +11,8 @@ namespace GameArchiveSync.App
 
         public readonly static string TempRepoPath;
 
+        public const string GameArchiveListUrl = "https://raw.githubusercontent.com/hstarorg/GameArchiveSync/master/docs/GameArchiveList.json";
+
         public const string CurrentVersion = "0.0.1";
 
         static GlobalConfig()
